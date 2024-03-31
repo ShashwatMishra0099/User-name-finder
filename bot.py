@@ -1,5 +1,5 @@
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram.ext import Updater, CommandHandler, CallbackContext, UpdateQueue
 
 TOKEN = "7073136015:AAEhuHGqeaEm33aNTtNHYmB8jBisAMQL1oA"
 
@@ -17,7 +17,7 @@ def members(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(response)
 
 def main() -> None:
-    updater = Updater(TOKEN)
+    updater = Updater(TOKEN, use_context=True, update_queue=UpdateQueue())
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler("start", start))
